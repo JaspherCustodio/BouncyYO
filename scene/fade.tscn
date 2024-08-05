@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3 uid="uid://duhoj846mnmbw"]
+
+[ext_resource type="Script" path="res://script/Fade.gd" id="1_jscpg"]
+[ext_resource type="AudioStream" uid="uid://dqsdoa6avapj2" path="res://assets/music&sound_effect/game-over-38511.mp3" id="2_fwx2b"]
+
+[sub_resource type="Animation" id="Animation_stenq"]
+resource_name = "fade"
+length = 3.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer2D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("2_fwx2b")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_57qt0"]
+_data = {
+"fade": SubResource("Animation_stenq")
+}
+
+[node name="Fade" type="Node"]
+script = ExtResource("1_jscpg")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -1599.0
+offset_top = -889.0
+offset_right = 1616.0
+offset_bottom = 968.0
+color = Color(0, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_57qt0")
+}
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+volume_db = -5.0
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

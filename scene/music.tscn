@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cm3ysyxbywk1g"]
+
+[ext_resource type="AudioStream" uid="uid://bucu1u837dieg" path="res://assets/music&sound_effect/NFB Theme.mp3" id="1_opso8"]
+
+[node name="Music" type="Node"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_opso8")
+volume_db = -5.0
+autoplay = true

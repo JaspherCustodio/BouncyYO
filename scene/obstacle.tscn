@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://dva1m68g5xj2g"]
+
+[ext_resource type="Script" path="res://script/obstacle.gd" id="1_sdk5n"]
+[ext_resource type="Texture2D" uid="uid://cevlbcstbmped" path="res://assets/obstacle.png" id="2_o5imd"]
+[ext_resource type="AudioStream" uid="uid://de3sef7iucg32" path="res://assets/music&sound_effect/90s-game-ui-6-185099.mp3" id="3_nq2kh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_635aq"]
+size = Vector2(136, 617)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_l1658"]
+polygon = PackedVector2Array(-71, 772, -71, 725, -114, 725, -114, 583, -52, 583, -52, 563, -114, 563, -114, 418, -72, 418, -72, 368, -114, 368, -114, 224, -72, 224, -72, 156, 62, 156, 62, 261, 114, 261, 114, 404, 63, 404, 63, 494, 19, 494, 19, 505, 82, 505, 82, 649, 62, 649, 62, 772)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_klqp5"]
+size = Vector2(136, 617)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_umrll"]
+size = Vector2(33, 301)
+
+[node name="Obstacle" type="Node2D"]
+z_index = 2
+script = ExtResource("1_sdk5n")
+metadata/_edit_group_ = true
+
+[node name="TopObstacle" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="TopObstacle"]
+position = Vector2(-3, -468)
+shape = SubResource("RectangleShape2D_635aq")
+
+[node name="Top" type="Sprite2D" parent="TopObstacle"]
+position = Vector2(-8, -464)
+rotation = -3.14159
+texture = ExtResource("2_o5imd")
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="TopObstacle"]
+position = Vector2(-8, 1)
+rotation = -3.14159
+occluder = SubResource("OccluderPolygon2D_l1658")
+
+[node name="BottomObstacle" type="Area2D" parent="."]
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomObstacle"]
+position = Vector2(-4, 467.5)
+shape = SubResource("RectangleShape2D_klqp5")
+
+[node name="Bot" type="Sprite2D" parent="BottomObstacle"]
+position = Vector2(0, 464)
+texture = ExtResource("2_o5imd")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="BottomObstacle"]
+occluder = SubResource("OccluderPolygon2D_l1658")
+
+[node name="Scored" type="Area2D" parent="."]
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Scored"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_umrll")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_nq2kh")
+volume_db = -5.0
+
+[connection signal="body_entered" from="TopObstacle" to="." method="_on_body_entered"]
+[connection signal="body_entered" from="BottomObstacle" to="." method="_on_body_entered"]
+[connection signal="body_entered" from="Scored" to="." method="_on_player_scored"]

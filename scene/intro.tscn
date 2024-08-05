@@ -1,0 +1,102 @@
+[gd_scene load_steps=8 format=3 uid="uid://86fktb0a5wpo"]
+
+[ext_resource type="Script" path="res://script/intro.gd" id="1_t0l2o"]
+[ext_resource type="FontFile" uid="uid://ci5nbpuw7gqb3" path="res://assets/fonts/paul-font/Paul-le1V.ttf" id="2_3qpuk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wukkk"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_mupav"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_a42at"]
+resource_name = "fade_in"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kv4le"]
+resource_name = "fade_out"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ivw2x"]
+_data = {
+"RESET": SubResource("Animation_mupav"),
+"fade_in": SubResource("Animation_a42at"),
+"fade_out": SubResource("Animation_kv4le")
+}
+
+[node name="Intro" type="Node2D"]
+script = ExtResource("1_t0l2o")
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_wukkk")
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 472.0
+offset_top = 192.0
+offset_right = 676.0
+offset_bottom = 248.0
+theme_override_fonts/font = ExtResource("2_3qpuk")
+theme_override_font_sizes/font_size = 50
+text = "A GAME BY"
+
+[node name="Label2" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 208.0
+offset_right = 928.0
+offset_bottom = 423.0
+theme_override_fonts/font = ExtResource("2_3qpuk")
+theme_override_font_sizes/font_size = 200
+text = "J S P H R"
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -112.0
+offset_top = -128.0
+offset_right = 1267.0
+offset_bottom = 760.0
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ivw2x")
+}

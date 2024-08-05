@@ -1,0 +1,206 @@
+[gd_scene load_steps=14 format=3 uid="uid://cpq5x2mnxqdtf"]
+
+[ext_resource type="Texture2D" uid="uid://dtlnw471bmhy6" path="res://assets/player.png" id="1_dj3ds"]
+[ext_resource type="Script" path="res://script/player.gd" id="1_rkimu"]
+[ext_resource type="Texture2D" uid="uid://ey06t2mhmdw0" path="res://assets/circle.png" id="2_346no"]
+[ext_resource type="AudioStream" uid="uid://cu2h8x2b5bcg8" path="res://assets/music&sound_effect/jump_c_02-102843.mp3" id="4_ncfg3"]
+[ext_resource type="AudioStream" uid="uid://bvrfjy5ch38k0" path="res://assets/music&sound_effect/textures-impact-137826.mp3" id="5_lq015"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fw70b"]
+radius = 71.0211
+
+[sub_resource type="Curve" id="Curve_lhax4"]
+max_value = 8.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 4.50909), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_274nx"]
+curve = SubResource("Curve_lhax4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_oont1"]
+lifetime_randomness = 0.3
+emission_shape = 3
+emission_box_extents = Vector3(100, 1, 1)
+particle_flag_disable_z = true
+direction = Vector3(-1, 0, 0)
+spread = 10.0
+flatness = 0.5
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 500.0
+initial_velocity_max = 1000.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+linear_accel_max = 100.0
+angle_min = -45.0
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_274nx")
+color = Color(1, 1, 0.0666667, 1)
+
+[sub_resource type="Animation" id="Animation_4svse"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GPUParticles2D:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_drcia"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 27), Vector2(0, -27), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 27), Vector2(0, -27), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PointLight2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 27), Vector2(0, -27), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_05ymc"]
+resource_name = "jump"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.744681, 1.40426), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8c5fq"]
+_data = {
+"RESET": SubResource("Animation_4svse"),
+"idle": SubResource("Animation_drcia"),
+"jump": SubResource("Animation_05ymc")
+}
+
+[node name="Player" type="CharacterBody2D"]
+z_index = 1
+script = ExtResource("1_rkimu")
+jump_force = 430
+
+[node name="Player" type="Sprite2D" parent="."]
+texture = ExtResource("1_dj3ds")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_fw70b")
+metadata/_edit_lock_ = true
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -16.1346)
+color = Color(1, 1, 0, 1)
+shadow_enabled = true
+texture = ExtResource("2_346no")
+texture_scale = 1.2
+metadata/_edit_lock_ = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = 3
+position = Vector2(-4.76837e-07, 53)
+scale = Vector2(0.2, 0.2)
+emitting = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_oont1")
+lifetime = 1.1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_8c5fq")
+}
+
+[node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_ncfg3")
+volume_db = 5.0
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_lq015")
